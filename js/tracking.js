@@ -1,48 +1,36 @@
-import { db } from "./firebase.js";
+function trackShipment() {
+    const trackingNumber = document.getElementById("tracking").value.trim();
 
-import {
-  collection,
-  query,
-  where,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-window.trackShipment = async function () {
-  const trackingNumber = document
-    .getElementById("tracking")
-    .value
-    .trim();
-
-  if (!trackingNumber) {
-    alert("Please enter a tracking number.");
-    return;
-  }
-
-  try {
-    const shipmentQuery = query(
-      collection(db, "shipments"),
-      where("trackingNumber", "==", trackingNumber)
-    );
-
-    const snapshot = await getDocs(shipmentQuery);
-
-    if (snapshot.empty) {
-      alert("Shipment not found.");
-      return;
+    if (trackingNumber === "") {
+        alert("Please enter a tracking number.");
+        return;
     }
 
-    const shipment = snapshot.docs[0].data();
+    db.collection("shipments")
+        .where("trackingNumber", "==", trackingNumber)
+        .get()
+        .then((snapshot) => {
 
-    document.getElementById("result").style.display = "block";
+            if (snapshot.empty) {
+                alert("Shipment not found.");
+                return;
+            }
 
-    document.getElementById("status").textContent =
-      shipment.status;
+            snapshot.forEach((doc) => {
 
-    document.getElementById("id").textContent =
-      shipment.trackingNumber;
+                const shipment = doc.data();
 
-  } catch (error) {
-    console.error(error);
-    alert("Unable to connect to the shipment database.");
-  }
-};
+                document.getElementById("result").style.display = "block";
+
+                document.getElementById("status").innerHTML = shipment.status;
+
+                document.getElementById("id").innerHTML = shipment.trackingNumber;
+
+            });
+
+        })
+        .catch((error) => {
+            alert("Database Error");
+            console.log(error);
+        });
+}
