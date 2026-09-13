@@ -21,8 +21,16 @@ function trackShipment() {
 
             document.getElementById("result").style.display = "block";
 
-            document.getElementById("status").textContent = shipment.status;
             document.getElementById("id").textContent = trackingNumber;
+document.getElementById("status").textContent = shipment.status;
+document.getElementById("origin").textContent = shipment.origin;
+document.getElementById("destination").textContent = shipment.destination;
+document.getElementById("location").textContent = shipment.currentLocation;
+document.getElementById("receiver").textContent = shipment.receiver;
+document.getElementById("package").textContent = shipment.packageType;
+document.getElementById("weight").textContent = shipment.weight;
+document.getElementById("courier").textContent = shipment.courier;
+document.getElementById("delivery").textContent = shipment.estimatedDelivery;
 
         })
         .catch(function(error) {
