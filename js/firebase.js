@@ -1,6 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
+// Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBKpGiSHTkD0XMwWBmIpChBQM9AJqMvSQs",
   authDomain: "swiftlink-logistics-de053.firebaseapp.com",
@@ -10,7 +8,8 @@ const firebaseConfig = {
   appId: "1:831490909055:web:800ae724c5073d2121b04a"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-export { db };
+// Firestore Database
+const db = firebase.firestore();
