@@ -133,34 +133,8 @@ Track Shipment
 </footer>
 
 <script type="module">
-import { db } from "./js/firebase.js";
-import {
-  collection,
-  query,
-  where,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-window.trackShipment = async function () {
-  const trackingNumber = document.getElementById("tracking").value.trim();
-
-  const q = query(
-    collection(db, "shipments"),
-    where("trackingNumber", "==", trackingNumber)
-  );
-
-  const snapshot = await getDocs(q);
-
-  if (snapshot.empty) {
-    alert("Shipment not found.");
-    return;
-  }
-
-  const data = snapshot.docs[0].data();
-
-  document.getElementById("result").style.display = "block";
-  document.getElementById("status").textContent = data.status;
-  document.getElementById("id").textContent = data.trackingNumber;
+window.trackShipment = function () {
+  alert("Button is working!");
 };
 </script>
 </body>
