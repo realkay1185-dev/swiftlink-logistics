@@ -1,26 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Track Shipment | SwiftLink Logistics</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f7fb;
+color:#222;
+}
+
+header{
+background:#0B1F3A;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:35px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+h1{
+margin-bottom:10px;
+}
+
+p{
+margin:10px 0;
+}
+
+input{
+width:100%;
+padding:15px;
+margin:20px 0;
+font-size:16px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:15px;
+background:#1E88E5;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1565C0;
+}
+
+.result{
+display:none;
+margin-top:30px;
+padding:25px;
+background:#f8f9fb;
+border-radius:12px;
+}
+
+.status-badge{
+display:inline-block;
+padding:10px 20px;
+background:#1E88E5;
+color:white;
+font-weight:bold;
+border-radius:30px;
+margin-bottom:20px;
+}
+
 .progress-container{
 margin:25px 0;
 }
 
 .progress-bar{
-width:100%;
 height:10px;
 background:#ddd;
-border-radius:30px;
+border-radius:20px;
 overflow:hidden;
 }
 
 .progress-fill{
 height:100%;
-width:50%;
+width:0%;
 background:#1E88E5;
 transition:.5s;
 }
@@ -31,120 +115,54 @@ justify-content:space-between;
 margin-top:10px;
 font-size:13px;
 font-weight:600;
-color:#555;
-}
-    
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-background:#f5f7fb;
-color:#222;
-}
-
-header{
-background:#0B1F3A;
-padding:18px;
-text-align:center;
-color:white;
-}
-
-.container{
-max-width:800px;
-margin:50px auto;
-background:white;
-padding:35px;
-border-radius:12px;
-box-shadow:0 8px 25px rgba(0,0,0,.1);
-}
-
-h1{
-margin-bottom:15px;
-}
-
-input{
-width:100%;
-padding:15px;
-font-size:16px;
-border:1px solid #ccc;
-border-radius:8px;
-margin:20px 0;
-}
-
-button{
-width:100%;
-padding:15px;
-background:#1E88E5;
-color:white;
-border:none;
-border-radius:8px;
-font-size:17px;
-cursor:pointer;
-}
-
-button:hover{
-background:#1565C0;
-}
-
-.result{
-margin-top:35px;
-padding:25px;
-background:#f8f9fb;
-border-radius:10px;
-display:none;
-}
-
-.status{
-color:#1E88E5;
-font-weight:bold;
-font-size:20px;
-margin-bottom:15px;
 }
 
 footer{
-margin-top:60px;
+margin-top:50px;
 background:#071321;
 color:white;
 text-align:center;
 padding:25px;
 }
+
 </style>
 
 </head>
-
+    
 <body>
 
 <header>
+
 <h2>SwiftLink Logistics</h2>
+
 </header>
 
 <div class="container">
 
 <h1>Track Your Shipment</h1>
 
-<p>Enter your SwiftLink shipment ID below.</p>
+<p>Enter your SwiftLink tracking number below.</p>
 
 <input
-    id="tracking"
-    placeholder="Example: SL20260001"
->
+id="tracking"
+placeholder="Example: SL20260001">
 
 <button onclick="trackShipment()">
-    Track Shipment
+
+Track Shipment
+
 </button>
 
 <div class="result" id="result">
 
 <div class="status-badge" id="statusBadge"></div>
-    <div class="progress-container">
+
+<div class="progress-container">
 
 <div class="progress-bar">
+
 <div class="progress-fill" id="progressFill"></div>
+
 </div>
 
 <div class="steps">
@@ -184,18 +202,97 @@ padding:25px;
 </div>
 
 </div>
-
 <footer>
 
-<p>© 2026 SwiftLink Logistics</p>
+<p>© 2026 SwiftLink Logistics. All Rights Reserved.</p>
 
 </footer>
 
-<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script type="module">
 
-<script src="js/firebase.js"></script>
-<script src="js/tracking.js"></script>
-  
+import { db } from "./js/firebase.js";
+
+import {
+collection,
+doc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+window.trackShipment = async function () {
+
+const trackingNumber = document.getElementById("tracking").value.trim();
+
+if (!trackingNumber) {
+alert("Please enter a tracking number.");
+return;
+}
+
+try {
+
+const docRef = doc(db, "shipments", trackingNumber);
+
+const docSnap = await getDoc(docRef);
+
+if (!docSnap.exists()) {
+
+alert("Shipment not found.");
+
+return;
+
+}
+
+const shipment = docSnap.data();
+
+document.getElementById("result").style.display = "block";
+
+document.getElementById("statusBadge").textContent = shipment.status;
+document.getElementById("status").textContent = shipment.status;
+document.getElementById("id").textContent = trackingNumber;
+document.getElementById("origin").textContent = shipment.origin;
+document.getElementById("destination").textContent = shipment.destination;
+document.getElementById("location").textContent = shipment.currentLocation;
+document.getElementById("receiver").textContent = shipment.receiver;
+document.getElementById("package").textContent = shipment.packageType;
+document.getElementById("weight").textContent = shipment.weight;
+document.getElementById("courier").textContent = shipment.courier;
+document.getElementById("delivery").textContent = shipment.estimatedDelivery;
+
+const progress = document.getElementById("progressFill");
+
+switch (shipment.status.toLowerCase()) {
+
+case "processing":
+progress.style.width = "25%";
+break;
+
+case "in transit":
+progress.style.width = "50%";
+break;
+
+case "out for delivery":
+progress.style.width = "75%";
+break;
+
+case "delivered":
+progress.style.width = "100%";
+break;
+
+default:
+progress.style.width = "10%";
+}
+
+} catch (error) {
+
+console.error(error);
+
+alert("Error: " + error.message);
+
+}
+
+};
+
+</script>
+
 </body>
+
 </html>
