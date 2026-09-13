@@ -132,29 +132,36 @@ Track Shipment
 
 </footer>
 
-<script>
+<script type="module">
+import { db } from "./js/firebase.js";
+import {
+  collection,
+  query,
+  where,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
-function trackShipment(){
+window.trackShipment = async function () {
+  const trackingNumber = document.getElementById("tracking").value.trim();
 
-let id=document.getElementById("tracking").value.trim();
+  const q = query(
+    collection(db, "shipments"),
+    where("trackingNumber", "==", trackingNumber)
+  );
 
-if(id==="SL-250913-0001"){
+  const snapshot = await getDocs(q);
 
-document.getElementById("result").style.display="block";
+  if (snapshot.empty) {
+    alert("Shipment not found.");
+    return;
+  }
 
-document.getElementById("status").innerHTML="In Transit";
+  const data = snapshot.docs[0].data();
 
-document.getElementById("id").innerHTML=id;
-
-}else{
-
-alert("Shipment not found.");
-
-}
-
-}
-
+  document.getElementById("result").style.display = "block";
+  document.getElementById("status").textContent = data.status;
+  document.getElementById("id").textContent = data.trackingNumber;
+};
 </script>
-
 </body>
 </html>
