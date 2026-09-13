@@ -1,33 +1,280 @@
-----------------------------------------------------
-                SWIFTLINK LOGISTICS
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwiftLink Logistics | Moving Deliveries. Building Trust.</title>
 
- Fast. Secure. Connected.
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
- [ Track Shipment ]
+<style>
 
-----------------------------------------------------
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
-✔ Express Delivery
-✔ International Shipping
-✔ Freight Services
-✔ Warehousing
+body{
+background:#f5f7fb;
+color:#222;
+}
 
-----------------------------------------------------
+header{
+background:#0B1F3A;
+color:white;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
 
- Why Choose SwiftLink?
+.logo{
+font-size:28px;
+font-weight:700;
+}
 
- ✓ Fast Delivery
- ✓ Real-Time Tracking
- ✓ Secure Handling
- ✓ 24/7 Customer Support
+nav a{
+color:white;
+text-decoration:none;
+margin-left:25px;
+font-weight:500;
+}
 
-----------------------------------------------------
+.hero{
+background:linear-gradient(rgba(11,31,58,.85),rgba(11,31,58,.85)),
+url("https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
+height:80vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+padding:20px;
+}
 
- Customer Reviews
+.hero h1{
+font-size:52px;
+margin-bottom:15px;
+}
 
- ★★★★★
- "Reliable and fast service."
+.hero p{
+font-size:20px;
+margin-bottom:30px;
+}
 
-----------------------------------------------------
+.track-box{
+background:white;
+padding:20px;
+border-radius:10px;
+max-width:650px;
+margin:auto;
+margin-top:-60px;
+box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
 
- Footer
+.track-box input{
+width:70%;
+padding:15px;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:16px;
+}
+
+.track-box button{
+padding:15px 28px;
+background:#1E88E5;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-size:16px;
+}
+
+section{
+padding:80px 8%;
+}
+
+.section-title{
+text-align:center;
+font-size:34px;
+margin-bottom:45px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 5px 18px rgba(0,0,0,.08);
+text-align:center;
+}
+
+.card h3{
+margin:20px 0;
+}
+
+.stats{
+display:flex;
+justify-content:space-around;
+flex-wrap:wrap;
+background:#0B1F3A;
+color:white;
+padding:70px 20px;
+}
+
+.stat{
+text-align:center;
+}
+
+.stat h2{
+font-size:40px;
+}
+
+footer{
+background:#071321;
+color:white;
+padding:40px;
+text-align:center;
+}
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+}
+
+nav{
+margin-top:15px;
+}
+
+.hero h1{
+font-size:35px;
+}
+
+.track-box input{
+width:100%;
+margin-bottom:12px;
+}
+
+.track-box button{
+width:100%;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">🚚 SwiftLink Logistics</div>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">Track</a>
+<a href="#">Services</a>
+<a href="#">About</a>
+<a href="#">Contact</a>
+</nav>
+
+</header>
+
+<div class="hero">
+
+<div>
+
+<h1>Moving Deliveries. Building Trust.</h1>
+
+<p>Reliable package delivery with secure shipment tracking.</p>
+
+</div>
+
+</div>
+
+<div class="track-box">
+
+<h2>Track Your Shipment</h2>
+
+<br>
+
+<input type="text" placeholder="Enter Shipment ID">
+
+<button>Track Shipment</button>
+
+</div>
+
+<section>
+
+<h2 class="section-title">Our Services</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>📦 Package Delivery</h3>
+<p>Fast and secure domestic package shipping.</p>
+</div>
+
+<div class="card">
+<h3>🌍 International Shipping</h3>
+<p>Worldwide shipping solutions for businesses and individuals.</p>
+</div>
+
+<div class="card">
+<h3>🚛 Express Delivery</h3>
+<p>Urgent shipments delivered with priority handling.</p>
+</div>
+
+<div class="card">
+<h3>📍 Live Tracking</h3>
+<p>Track every shipment from dispatch to delivery.</p>
+</div>
+
+</div>
+
+</section>
+
+<div class="stats">
+
+<div class="stat">
+<h2>99%</h2>
+<p>On-Time Deliveries</p>
+</div>
+
+<div class="stat">
+<h2>24/7</h2>
+<p>Customer Support</p>
+</div>
+
+<div class="stat">
+<h2>500+</h2>
+<p>Daily Shipments</p>
+</div>
+
+</div>
+
+<footer>
+
+<h2>SwiftLink Logistics</h2>
+
+<p>Moving Deliveries. Building Trust.</p>
+
+<br>
+
+<p>© 2026 SwiftLink Logistics. All Rights Reserved.</p>
+
+</footer>
+
+</body>
+</html>
