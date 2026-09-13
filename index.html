@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Package Tracker</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f4f6f9;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+background:#fff;
+width:400px;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+h1{
+text-align:center;
+margin-bottom:25px;
+color:#333;
+}
+
+input,select{
+width:100%;
+padding:14px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:14px;
+background:#4b73ff;
+border:none;
+color:#fff;
+font-size:17px;
+border-radius:8px;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#355ae8;
+}
+
+.footer{
+margin-top:20px;
+text-align:center;
+font-size:13px;
+color:#777;
+}
+
+.logo{
+font-size:50px;
+text-align:center;
+margin-bottom:15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">📦</div>
+
+<h1>Package Tracker</h1>
+
+<select id="carrier">
+<option value="fedex">FedEx</option>
+<option value="ups">UPS</option>
+<option value="usps">USPS</option>
+<option value="dhl">DHL</option>
+</select>
+
+<input
+type="text"
+id="tracking"
+placeholder="Enter Tracking Number">
+
+<button onclick="trackPackage()">
+Track Package
+</button>
+
+<div class="footer">
+Track your shipment using the carrier's official tracking page.
+</div>
+
+</div>
+
+<script>
+
+function trackPackage(){
+
+const carrier=document.getElementById("carrier").value;
+const number=document.getElementById("tracking").value.trim();
+
+if(number===""){
+alert("Please enter a tracking number.");
+return;
+}
+
+let url="";
+
+switch(carrier){
+
+case "fedex":
+url="https://www.fedex.com/fedextrack/?trknbr="+encodeURIComponent(number);
+break;
+
+case "ups":
+url="https://www.ups.com/track?tracknum="+encodeURIComponent(number);
+break;
+
+case "usps":
+url="https://tools.usps.com/go/TrackConfirmAction?tLabels="+encodeURIComponent(number);
+break;
+
+case "dhl":
+url="https://www.dhl.com/us-en/home/tracking.html?tracking-id="+encodeURIComponent(number);
+break;
+
+}
+
+window.open(url,"_blank");
+
+}
+
+</script>
+
+</body>
+</html>
