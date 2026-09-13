@@ -22,6 +22,7 @@ function trackShipment() {
             document.getElementById("result").style.display = "block";
 
             document.getElementById("id").textContent = trackingNumber;
+document.getElementById("statusBadge").textContent = shipment.status;
 document.getElementById("status").textContent = shipment.status;
 document.getElementById("origin").textContent = shipment.origin;
 document.getElementById("destination").textContent = shipment.destination;
