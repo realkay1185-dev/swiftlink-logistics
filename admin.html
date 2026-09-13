@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwiftLink Admin Dashboard</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family:Poppins,sans-serif;
+    background:#f4f7fb;
+}
+
+header{
+    background:#0B1F3A;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:900px;
+    margin:30px auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    background:#1E88E5;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1565C0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h2>SwiftLink Logistics Admin</h2>
+</header>
+
+<div class="container">
+
+<h2>Create Shipment</h2>
+
+<input id="trackingNumber" placeholder="Tracking Number">
+
+<input id="status" placeholder="Status">
+
+<input id="origin" placeholder="Origin">
+
+<input id="destination" placeholder="Destination">
+
+<input id="location" placeholder="Current Location">
+
+<input id="receiver" placeholder="Receiver">
+
+<input id="packageType" placeholder="Package Type">
+
+<input id="weight" placeholder="Weight">
+
+<input id="courier" placeholder="Courier">
+
+<input id="delivery" placeholder="Estimated Delivery">
+
+<button onclick="createShipment()">
+
+Create Shipment
+
+</button>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+
+<script src="js/firebase.js"></script>
+<script src="js/admin.js"></script>
+
+</body>
+</html>
