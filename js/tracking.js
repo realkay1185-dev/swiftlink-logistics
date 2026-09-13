@@ -22,7 +22,35 @@ function trackShipment() {
             document.getElementById("result").style.display = "block";
 
             document.getElementById("id").textContent = trackingNumber;
-document.getElementById("statusBadge").textContent = shipment.status;
+const badge = document.getElementById("statusBadge");
+
+badge.textContent = shipment.status;
+
+badge.className = "status-badge";
+
+switch (shipment.status.toLowerCase()) {
+
+case "processing":
+badge.classList.add("processing");
+break;
+
+case "in transit":
+badge.classList.add("transit");
+break;
+
+case "out for delivery":
+badge.classList.add("delivery");
+break;
+
+case "delivered":
+badge.classList.add("delivered");
+break;
+
+default:
+badge.classList.add("delayed");
+
+}
+
 document.getElementById("status").textContent = shipment.status;
             const progress = document.getElementById("progressFill");
 
